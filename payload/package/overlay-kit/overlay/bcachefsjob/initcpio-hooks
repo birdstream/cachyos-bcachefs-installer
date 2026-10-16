@@ -1,0 +1,28 @@
+#!/usr/bin/ash
+# This hook is for unencrypted, udev-based mkinitcpio only.
+run_hook() {
+    [ -r /etc/bcachefs-root-members ] || return 1
+    read -r bc_expected_uuid < /etc/bcachefs-root-members
+    [ "$root" = "UUID=$bc_expected_uuid" ] || return 0
+    mount_handler=bcachefs_tiering_mount
+}
+bcachefs_tiering_mount() {
+    local partuuid devices='' first=1 device
+    while IFS= read -r partuuid; do
+        if [ "$first" = 1 ]; then first=0; continue; fi
+        [ -n "$partuuid" ] || continue
+        device="/dev/disk/by-partuuid/$partuuid"
+        if ! poll_device "$device" 30; then
+            err "Bcachefs member missing: $device"
+            launch_interactive_shell
+            return 1
+        fi
+        devices="${devices}${devices:+:}${device}"
+    done < /etc/bcachefs-root-members
+    [ -n "$devices" ] || return 1
+    if ! mount -i -t bcachefs -o "${rwopt:-ro}${rootflags:+,$rootflags}" "$devices" "$1"; then
+        err 'Failed to mount all bcachefs root members. No degraded mount is attempted.'
+        launch_interactive_shell
+        return 1
+    fi
+}
