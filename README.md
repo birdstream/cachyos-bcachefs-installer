@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/e43be8b9-1085-4726-9276-291f362b5ee1
+
 # cachyos-bcachefs-installer
 
 **[Experimental] CachyOS ISO remaster script with bcachefs installation and SSD/HDD tiering in Calamares**
