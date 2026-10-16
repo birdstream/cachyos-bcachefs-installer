@@ -49,7 +49,6 @@ There are several current limitations:
 - This creates new filesystems. It is **not an in-place conversion or migration tool**; selected installation partitions are formatted.
 - Encrypted bcachefs members and complex storage stacks are unsupported. It currently accepts one member per physical disk, up to 16 members, and 1–3 replicas subject to the available disks.
 - Tiering is not redundancy. The default is one data copy; an SSD can hold the only current copy of data.
-- The new tiering page and validation messages are currently mostly in Swedish.
 - The script expects a specific CachyOS desktop ISO layout and rejects signed SquashFS images. It does not provide a Secure Boot signing workflow.
 - Calamares is pinned to a specific source revision, while system packages come from current repositories. Future upstream changes may require script updates, and builds are not guaranteed to be bit-for-bit reproducible.
 - **An accidental Swedish lesson:** the new bcachefs/tiering page and its validation messages ended up in Swedish entirely by accident. Apparently my native language sneaked into the code. *Cough.* 😅 This is a localization oversight, not a requirement to install CachyOS in Swedish.
