@@ -6,10 +6,6 @@ I've been putting together a script that takes an **original CachyOS desktop ISO
 
 This is an unofficial, experimental project. Feedback, code review and testing on spare hardware or disposable VMs are welcome.
 
-Downloads:
-
-- Script: [ADD PUBLIC DOWNLOAD LINK]
-- Separate payload source archive: [ADD PUBLIC SOURCE LINK]
 
 The source archive contains exactly the payload embedded in the script, including the build scripts, PKGBUILD, installer modifications and tiering UI.
 
